@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Cart</title>
+
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<br><br><br>
+<div class="container" th:if="${not #lists.isEmpty(cart.cartItems)}">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Tên sản phẩm</th>
+      <th scope="col">Số lượng</th>
+      <th scope="col">Giá</th>
+      <th scope="col">Tổng tiền</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${cart.cartItems}">
+      <td th:text="${item.getId()}"></td>
+      <td th:text="${item.getTenSP()}"></td>
+      <td>
+        <label>
+          <input type="number" min="1"
+                 th:value="${item.getQuantity()}"
+                 th:attr="data-id=${item.getId()}"
+                 class="form-control quantity">
+        </label>
+      </td>
+      <td th:text="${item.getFormattedGiaTien()}"></td>
+      <td th:text="${item.getFormattedTongTien1()}"></td>
+      <td>
+        <a class="btn btn-danger" th:href="@{/cart/removeFromCart/{id}(id=${item.getId()})}">Remove</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Tổng tiền: <span th:text="${totalPrice}"></span></h3>
+    </div>
+
+    <form method="get" th:action="@{/cart/checkout}"  class="needs-validation" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="customerName">Tên</label>
+          <input type="text" id="customerName" class="form-control"name="customerName" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="Phone">SDT</label>
+          <input type="text" class="form-control" id="Phone" name="phone" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="Email">Email</label>
+          <input type="text" class="form-control" id="Email" name="email" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="Addrress">Địa chỉ</label>
+          <input type="text" class="form-control" id="Addrress" name="address" required>
+        </div>
+      </div>
+      <select id="typePayment" name="typePayment" class="form-control" aria-label="Default select example">
+        <option th:value="cash">Thanh toán trực tiếp</option>
+        <!--        <option th:value="credit">Credit Card</option>-->
+        <!--        <option th:value="paypal">PayPal</option>-->
+      </select>
+      <hr>
+
+      <div class="col-md-12 text-center">
+        <button class="btn btn-success" type="submit"
+                onClick="return confirm('Bạn Có Chắc Chắn Đặt Hàng?')">Đặt hàng
+        </button>
+        <a class="btn btn-danger"
+           th:href="@{/cart/clearCart}">Xóa giỏ hàng</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+<div class="container" th:if="${#lists.isEmpty(cart.cartItems)}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 text-center">
+        <h3 class="mt-5">Giỏ hàng của bạn đang trống </h3>
+        <p class="lead">Vui lòng thêm sản phẩm vào giỏ hàng</p>
+        <a class="btn btn-primary" href="/sanPhams">Quay về trang sản phẩm</a>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<footer>
+  <th:block th:replace="layout :: footer"></th:block>
+</footer>
+
+<script th:src="@{/js/cart.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

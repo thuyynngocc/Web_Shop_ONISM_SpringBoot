@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <title>Website bán quần áo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Liên kết tới thư viện Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="header">
+    <th:block th:replace="layout :: header"></th:block>
+</div>
+
+<!-- Content -->
+<br><br><br><br><br><br>
+<span>
+    <nav class="navbar navbar-light">
+        <form class="d-flex justify-content-center" th:action="@{/sanPhams/search}" method="get">
+            <button sec:authorize="hasAnyAuthority('ADMIN', 'QUANLY')" class="btn btn-outline-success" type="submit" formaction="/sanPhams/add">Thêm</button>
+            <div class="mr-2"></div>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+
+<!--             <img th:src="@{'images/' + ${SanPham.getHinhAnh()}}" width="250" height="300" class="card-img-top" alt="Product 3">-->
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+<form class="d-flex ml-auto justify-content-between" th:action="@{/sanPhams/sp}" method="get">
+        <select class="form-control me-2" name="loaiSanPham">
+            <option th:value="null">Tất cả</option> <!-- Tùy chọn để hiển thị tất cả loại sản phẩm -->
+            <option th:each="loai : ${loais}"
+                    th:value="${loai.id}"
+                    th:text="${loai.tenLoai}">
+            </option>
+        </select>
+            <button class="btn btn-outline-success" type="submit">Lọc</button>
+    </form>
+    </nav>
+</span>
+
+
+<div class="container mt-4">
+    <div class="row">
+        <div  th:each="SanPham : ${sanphams}" class="col-md-4">
+            <a th:href="@{/sanPhams/chitiet/{id}(id=${SanPham.id})}">
+                <div class="card">
+                    <div class="card-body">
+                        <img th:src="@{'/images/' + ${SanPham.getHinhAnh()}}" width="250" height="300" class="card-img-top" alt="Product 3">
+                        <h5 class="card-title" th:text="${SanPham.getTenSP()}"></h5>
+                        <p style="font-weight: bold;" class="card-title" th:text="${SanPham.getFormattedGiaTien()}"></p>
+                        <button sec:authorize="!hasAnyAuthority('ADMIN', 'QUANLY')" type="submit" class="btn btn-success">Mua ngay</button>
+                        <a sec:authorize="hasAnyAuthority('ADMIN', 'QUANLY')" class="btn btn-primary" th:href="@{/sanPhams/edit/{id}(id=${SanPham.id})}">Edit</a>
+                        <a sec:authorize="hasAnyAuthority('ADMIN', 'QUANLY')" class="btn btn-danger" th:href="@{/sanPhams/delete/{id}(id=${SanPham.id})}"onclick="return confirm('Bạn có muốn xóa?')">Delete</a>
+                    </div>
+                </div>
+
+            </a>
+        </div>
+
+    </div>
+    </a>
+</div>
+</div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<!-- Footer -->
+<footer>
+    <th:block th:replace="layout :: footer"></th:block>
+</footer>
+
+<!-- Link JS Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

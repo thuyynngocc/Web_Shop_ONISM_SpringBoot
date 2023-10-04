@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Liên kết tới thư viện Font Awesome -->
+
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<br>
+<br>
+<br>
+<main class="bg-light" >
+    <center>
+        <section class="hot-ads d-none d-md-block  container-fluid ">
+            <article >
+                <div>
+                    <img src="/images/7.jpg" width="350" height="350" alt="new arrivals" >
+                    <img src="/images/8.jpg" width="350" height="350" alt="new arrivals" >
+                    <img src="/images/9.jpg" width="350" height="350" alt="new arrivals" >
+                </div>
+            </article>
+            <span class="slider"></span>
+        </section>
+    </center>
+    <br>
+    <center>
+        <section class="hot-ads d-none d-md-block  container-fluid ">
+            <h3 class=" ml-2">
+                NEW ARRIVALS
+            </h3>
+            <br>
+            <article >
+                    <div>
+                        <img src="/images/4.jpg" width="350" height="350" alt="new arrivals" >
+                        <img src="/images/5.jpg" width="350" height="350" alt="new arrivals" >
+                        <img src="/images/6.jpg" width="350" height="350" alt="new arrivals" >
+                    </div>
+            </article>
+            <span class="slider"></span>
+        </section>
+    </center>
+    <br>
+    <section class=" container clock">
+        <center>
+            <h3 >
+                <span class="iconify" data-icon="flat-ui:clocks" data-inline="false"></span> DOUBLE TEE COLECTION
+            </h3>
+        </center>
+        <br>
+        <br>
+        <br>
+    </section>
+</main>
+<th:block th:replace="layout :: footer"></th:block>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

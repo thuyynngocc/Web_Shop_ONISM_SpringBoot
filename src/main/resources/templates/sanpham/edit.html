@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:replace="layout :: link-css"></th:block>
+  <title>Edit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<br>
+<br>
+<br>
+<br>
+<br>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+  <h1>Sửa sản phẩm</h1>
+  <form th:action="@{/sanPhams/edit}" th:object="${sanpham}" method ="post">
+    <input type="hidden" th:field="*{id}">
+    <div class="col-6 mb-3">
+      <label class="form-label" for="tenSP">Tên sản phẩm</label>
+      <input  class="form-control" type="text" th:field="*{tenSP}" id="tenSP">
+      <span class="text-danger" th:if="${#fields.hasErrors('tenSP')}" th:errors="*{tenSP}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="giaTien">Giá tiền</label>
+      <input  class="form-control" type="text" th:field="*{giaTien}" id="giaTien">
+      <span class="text-danger" th:if="${#fields.hasErrors('giaTien')}" th:errors="*{giaTien}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="soLuong">Số lượng</label>
+      <input  class="form-control" type="text" th:field="*{soLuong}" id="soLuong">
+      <span class="text-danger" th:if="${#fields.hasErrors('soLuong')}" th:errors="*{soLuong}"></span>
+
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="hinhAnh">Hình ảnh</label>
+      <input  class="form-control" type="text" th:field="*{hinhAnh}" id="hinhAnh">
+      <span class="text-danger" th:if="${#fields.hasErrors('hinhAnh')}" th:errors="*{hinhAnh}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="loai">Loại</label>
+      <select class="form-control" id="loai" name="loai.id">
+        <option th:value="${loai.id}" th:text="${loai.tenLoai}"></option>
+        <option value="">-- Select Category --</option>
+        <option th:each="loai : ${loais}" th:value="${loai.id}" th:text="${loai.tenLoai}"></option>
+      </select>
+    </div>
+
+    <input type="submit" class="btn btn-primary" th:value="Save">
+  </form>
+  <br>
+  <a th:href="@{/sanPhams}">Trở về trang chủ</a>
+</div>
+<br><br><br><br><br>
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
